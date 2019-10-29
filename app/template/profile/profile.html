@@ -1,0 +1,156 @@
+
+<link href="../../static/css/002.css" rel='stylesheet' type='text/css'>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="Favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <title>Profile</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+    <div class="container">
+        <a class="navbar-brand" href="/hello">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">Sign Up</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Profile of {{ .Data.User.Name }}</div>
+                    <div class="card-body">
+                        <form action="/profile" method="post" enctype="multipart/form-data">
+                        
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right"></label>
+                                {{if .Data.Message}}
+                                        <div class="alert alert-success" class="col-md-6">
+                                                <strong>{{ .Data.Message }}</strong>
+                                        </div>
+                                {{end}}
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="avatar" class="col-md-4 col-form-label text-md-right">Avatar</label>
+                                <div class="col-md-6">
+                                    <img id="myid" src="../../static/images/{{ .Data.User.Avatar }}" height="200" width="200" />
+                                    <input type="file" id="image" class="form-control" name="myAvatar" autofocus capture>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Email</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="email_address" class="form-control" name="Email" value="{{ .Data.User.Email }}" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" class="form-control" name="Password">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Name</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="name" class="form-control" name="Name" value="{{ .Data.User.Name }}" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Address</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="address" class="form-control" name="Address" value="{{ .Data.User.Address }}" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Phone</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="phone" class="form-control" name="Phone" value="{{ .Data.User.Phone }}" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="checkbox">
+                                        <!-- <label>
+                                            <input type="checkbox" name="remember"> Remember Me
+                                        </label> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                                <!-- <a href="#" class="btn btn-link">
+                                    Forgot Your Password?
+                                </a> -->
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</main>
+
+<script>
+    function display(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            $('#myid').attr('src', event.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+ 
+    $("#image").change(function() {
+        display(this);
+    });
+</script>
+
+</body>
+</html>

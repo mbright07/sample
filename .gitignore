@@ -1,0 +1,6 @@
+vendor
+vendor/
+*.env
+nginx.conf
+app/__debug_bin
+app/tmp/*
